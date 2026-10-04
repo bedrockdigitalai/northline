@@ -442,3 +442,91 @@ html.motion .pl-mark .lk-v{stroke:#2E7CF6}
 .brand:hover .lk-v{transform:translateY(-2px)}
 .lk-v{transition:transform .5s var(--ease)}
 @media (max-width:640px){.brand__lk{height:32px}}
+
+/* =====================================================================
+   v2 — logo-forward moments, multi-page shell, Safari hardening
+   ===================================================================== */
+
+/* ---- preloader → hero handoff: big mark flies to the nav lockup ---- */
+.preloader{background:transparent;pointer-events:none}
+.pl-bg{position:absolute;inset:0;background:var(--void);will-change:transform}
+.pl-inner{position:relative;z-index:2;flex-direction:column;gap:clamp(22px,4.5vh,40px)}
+.pl-mark{display:block;width:clamp(120px,26vmin,240px);height:auto;aspect-ratio:88/94;will-change:transform;overflow:visible}
+.pl-meta{flex-direction:row;align-items:baseline;gap:18px;text-align:left}
+.pl-meta b{font-size:28px}
+.pl-bar{z-index:2}
+html.motion .pl-mark .pl-path{stroke-width:1.2}
+.pl-glow{position:absolute;left:50%;top:50%;width:min(80vmin,720px);aspect-ratio:1;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(46,124,246,.16),transparent 70%);z-index:1;pointer-events:none}
+
+/* ---- oversized outlined mark (hero + footer watermark) ---- */
+.wm{position:absolute;pointer-events:none;overflow:visible;fill:none}
+.wm path{vector-effect:non-scaling-stroke;stroke-linejoin:miter;stroke-width:1}
+.wm .wm-n{stroke:rgba(245,247,250,.2)}
+.wm .wm-v{stroke:rgba(46,124,246,.7)}
+html.motion .wm path{stroke-dasharray:1;stroke-dashoffset:1}
+.hero__mark{right:-3vw;top:50%;height:min(118vh,1100px);width:auto;aspect-ratio:88/94;z-index:-3;transform:translate3d(0,-50%,0);will-change:transform;opacity:.9}
+.hero__mark-wrap{position:absolute;inset:0;z-index:-3;pointer-events:none;overflow:hidden}
+.hero__mark-wrap .hero__mark{z-index:auto}
+.footer__mark-wrap{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.footer__mark{right:calc(var(--pad) - 2vw);top:-6%;height:clamp(300px,52vw,640px);width:auto;aspect-ratio:88/94;opacity:.55;will-change:transform}
+.footer__grid,.wordmark,.basebar{position:relative;z-index:1}
+@media (max-width:760px){.hero__mark{right:-34vw;height:78vh}.footer__mark{right:-16vw;opacity:.4}}
+
+/* ---- HUD: mark + section index ---- */
+.hud-index{gap:14px}
+.hud-mark{display:block;width:13px;height:14px;overflow:visible;flex:none}
+.hud-mark .lk-n{fill:#cdd3dc}
+.hud-mark .lk-v{fill:#2E7CF6;transition:transform .5s var(--ease)}
+.hud-index.is-tick .hud-mark .lk-v{transform:translateY(-3px)}
+.hud-index.on-light .hud-mark .lk-n{fill:#0A0E14}
+.hud-index.on-light .hud-mark .lk-v{fill:#1F63D1}
+.rail-mark{display:block;width:12px;height:13px;margin:0 0 12px auto;opacity:.7}
+.rail-mark .lk-n{fill:currentColor}.rail-mark .lk-v{fill:#2E7CF6}
+.rail{color:var(--dim)}
+.rail.on-light .rail-mark{color:#0A0E14}
+
+/* ---- nav current page + optional links ---- */
+.nav-links a[aria-current="page"]{color:var(--white);background-size:100% 1px;background-position:0 100%}
+.nav-links .ulink[aria-current="page"]::before{content:"";display:inline-block;width:5px;height:5px;margin-right:9px;background:var(--accent);transform:rotate(45deg) translateY(-1px)}
+@media (max-width:1100px){.nav-links .ulink:nth-child(3){display:inline}.nav-links .nav-opt{display:none}}
+.nav-links{gap:clamp(18px,2.2vw,34px)}
+
+/* ---- page transition: clip-path wipe ---- */
+.pt{position:fixed;inset:0;z-index:520;pointer-events:none;visibility:hidden;-webkit-clip-path:inset(100% 0 0 0);clip-path:inset(100% 0 0 0);transition:-webkit-clip-path .8s cubic-bezier(.76,0,.24,1),clip-path .8s cubic-bezier(.76,0,.24,1),visibility 0s .8s}
+.pt__bg{position:absolute;inset:0;background:var(--void)}
+.pt__bg::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--accent)}
+.pt__bg::after{content:"";position:absolute;left:50%;top:50%;width:min(70vmin,620px);aspect-ratio:1;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(46,124,246,.14),transparent 70%)}
+.pt__mark{position:absolute;left:50%;top:50%;width:clamp(70px,12vmin,120px);height:auto;aspect-ratio:88/94;transform:translate(-50%,-50%);overflow:visible}
+.pt__mark path{stroke-width:1.2}
+.pt__lbl{position:absolute;left:0;right:0;top:calc(50% + clamp(60px,10vmin,96px));text-align:center;font-size:10px;letter-spacing:.3em;color:var(--dim)}
+.pt.is-in{visibility:visible;-webkit-clip-path:inset(0 0 0 0);clip-path:inset(0 0 0 0);transition:-webkit-clip-path .8s cubic-bezier(.76,0,.24,1),clip-path .8s cubic-bezier(.76,0,.24,1),visibility 0s}
+.pt .pt__mark path{fill:rgba(245,247,250,0);stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .7s var(--ease) .15s,fill .4s ease .45s}
+.pt .pt__mark .pt-n{stroke:#F5F7FA}.pt .pt__mark .pt-v{stroke:#2E7CF6}
+.pt.is-in .pt__mark path{stroke-dashoffset:0}
+.pt.is-in .pt__mark .pt-n{fill:#F5F7FA}.pt.is-in .pt__mark .pt-v{fill:#2E7CF6}
+html.pt-in .pt{visibility:visible;-webkit-clip-path:inset(0 0 0 0);clip-path:inset(0 0 0 0);transition:none;animation:ptFail 0s linear 3.4s forwards}
+html.pt-in .pt .pt__mark path{stroke-dashoffset:0;transition:none}
+html.pt-in .pt .pt__mark .pt-n{fill:#F5F7FA}html.pt-in .pt .pt__mark .pt-v{fill:#2E7CF6}
+html.pt-in .pt.is-out{-webkit-clip-path:inset(0 0 100% 0);clip-path:inset(0 0 100% 0);transition:-webkit-clip-path .85s cubic-bezier(.76,0,.24,1),clip-path .85s cubic-bezier(.76,0,.24,1)}
+@keyframes ptFail{to{visibility:hidden;opacity:0}}
+html.pt-in .preloader{display:none!important}
+
+/* ---- Safari / WebKit hardening ---- */
+.site-header.is-solid{background:rgba(10,14,20,.94)}
+@supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  .site-header.is-solid{background:rgba(10,14,20,.72)}
+}
+.menu{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+html.lenis-stopped,html.lenis-stopped body{overscroll-behavior:none}
+body.menu-open{overflow:hidden}
+.hero,.mission__stage{min-height:100vh;min-height:100svh}
+@supports (min-height:100dvh){.menu{min-height:100dvh}}
+.btn,.nav-cta{-webkit-tap-highlight-color:transparent;-webkit-appearance:none;appearance:none}
+.btn-line,.btn-solid{-webkit-transform:translateZ(0);transform:translateZ(0)}
+.ops__bg,.hero__photo,.careers__img{-webkit-backface-visibility:hidden;backface-visibility:hidden}
+/* iOS: avoid sticky 300ms tap + 100vh jump on rotate */
+a,button{touch-action:manipulation}
+input,select,textarea,button{font:inherit;-webkit-appearance:none;appearance:none;border-radius:0}
+@supports not (clip-path:inset(0 round 1px)){
+  html.motion .careers__frame{clip-path:none}
+}
