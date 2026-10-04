@@ -199,3 +199,132 @@ html.motion .pmission .mw{opacity:.14}
   .sheet{box-shadow:none;padding:0}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
+
+/* ==========================================================================
+   v3 — internal page system (capability / sector / process / insights / 404)
+   ========================================================================== */
+.h-page{font-size:clamp(34px,min(var(--hs,9.4vw),15vh),168px)}
+.sec--tight .sec__in{padding-block:clamp(50px,6vw,90px)}
+.sec .tag,.cta-band .tag{color:var(--dim)}
+.crumbs{row-gap:6px}
+.crumbs a{padding-block:6px}
+
+/* sticky sub-index rides under the header when it is visible */
+.capidx{transition:transform .5s var(--ease)}
+.capidx.is-stuck.hdr-on{transform:translate3d(0,var(--navh,71px),0)}
+.capidx a{min-height:44px;align-items:center}
+.capidx a:focus-visible{outline-offset:-3px}
+
+/* ---- pinned scene: sticky stage, scroll picks the active item (transform/opacity only) ---- */
+.pinx{position:relative;z-index:2;background:var(--void);border-top:1px solid var(--line-soft)}
+.pinx__stick{position:relative}
+.pinx__in{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(28px,5vw,88px);align-items:center;padding-block:clamp(70px,9vw,130px)}
+.pinx__copy{display:flex;flex-direction:column;gap:18px;min-width:0}
+.pinx__copy .cap-num{font-size:clamp(90px,11vw,200px);line-height:.8}
+.pinx__copy .tag{color:#6da2ff}
+.pin-h{font-size:clamp(30px,3.8vw,60px)!important}
+.pinlist{display:flex;flex-direction:column;margin-top:6px}
+.pinitem{display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 12px;padding:16px 0;border-top:1px solid var(--line-soft)}
+.pinitem:last-child{border-bottom:1px solid var(--line-soft)}
+.pinitem__n{font-size:11px;letter-spacing:.14em;color:#aab3c2;padding-top:5px}
+.pinitem h3{font:600 clamp(18px,1.6vw,24px)/1.2 var(--sg);letter-spacing:-.005em}
+.pinitem p{font-size:15px;line-height:1.6;color:#aeb7c4;margin-top:6px;max-width:520px}
+.pinitem h3 a{color:var(--white)}
+.pinitem h3 a:hover{color:#8fb9ff}
+.pindetail{display:none}
+.pinprog{display:none;align-items:center;gap:10px;font-size:11px;letter-spacing:.14em;color:var(--dim)}
+.pinprog b{color:var(--white);font-weight:500}
+.pinprog i{display:block;flex:1;max-width:220px;height:1px;background:var(--line)}
+.pinprog u{display:block;height:100%;background:var(--accent);transform:scaleX(0);transform-origin:0 50%}
+.pinx__vis{min-width:0}
+.pinx__vis .cap-visual{aspect-ratio:4/3;width:100%}
+.pnode circle{fill:#0A0E14;stroke:#8A94A3;stroke-width:1.5;transition:fill .5s ease,stroke .5s ease}
+.pnode text{fill:#8A94A3;transition:fill .5s ease}
+.pnode.is-on circle{fill:#2E7CF6;stroke:#2E7CF6}
+.pnode.is-on text{fill:#F5F7FA}
+
+@media (min-width:900px) and (min-height:620px){
+  html.motion .pinx{height:calc(100vh + (var(--n,4) - 1) * 52vh)}
+  html.motion .pinx__stick{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;overflow:hidden}
+  html.motion .pinx__in{width:100%;padding-block:clamp(120px,15vh,150px) clamp(30px,5vh,56px);align-items:center}
+  html.motion .pinx__copy .cap-num{font-size:clamp(70px,min(9vw,17vh),170px)}
+  html.motion .pinx__vis .cap-visual{aspect-ratio:auto;height:min(58vh,560px)}
+  html.motion .pinitem{opacity:.72;transition:opacity .45s ease,transform .6s var(--ease);padding:11px 0;align-items:baseline}
+  html.motion .pinitem p{display:none}
+  html.motion .pinitem.is-active{opacity:1;transform:translate3d(8px,0,0)}
+  html.motion .pinitem.is-active .pinitem__n{color:#6da2ff}
+  html.motion .pindetail{display:grid;border-top:1px solid var(--line);padding-top:14px;min-height:5.2em}
+  html.motion .pindetail p{grid-area:1/1;font-size:clamp(15px,1.15vw,17px);line-height:1.65;color:#c3cbd6;max-width:520px;opacity:0;transform:translate3d(0,8px,0);transition:opacity .45s ease,transform .6s var(--ease)}
+  html.motion .pindetail p.is-active{opacity:1;transform:none}
+  html.motion .pinprog{display:flex}
+  html.motion .pinx__copy{gap:12px}
+}
+
+/* ---- who it is for / chips ---- */
+.two-up--cards .lcard{border-top:1px solid var(--line);padding-top:22px}
+.two-up--cards .lcard li{font-size:clamp(16px,1.3vw,19px)}
+.chiprow{display:flex;flex-wrap:wrap;gap:10px 12px;align-items:center}
+.chip-link{display:inline-flex;gap:10px;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--line);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);transition:color .25s,border-color .25s,background .25s}
+.chip-link:hover,.chip-link:focus-visible{color:var(--white);border-color:var(--accent);background:rgba(46,124,246,.1)}
+
+/* ---- how-we-work strip ---- */
+.stepstrip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border-top:1px solid var(--line)}
+.stepstrip li{position:relative;padding:20px 16px 20px 0;display:flex;flex-direction:column;gap:12px;border-right:1px solid var(--line-soft);padding-left:16px}
+.stepstrip li:first-child{padding-left:0}
+.stepstrip li:last-child{border-right:0}
+.stepstrip li span{font-size:11px;letter-spacing:.14em;color:#6da2ff}
+.stepstrip li b{font:600 clamp(18px,2vw,28px)/1.1 var(--sg);text-transform:uppercase;letter-spacing:-.005em}
+
+/* ---- related cards ---- */
+.relgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.6vw,24px)}
+.relgrid--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.relgrid--col{grid-template-columns:minmax(0,1fr)}
+.relcard{position:relative;display:flex;flex-direction:column;gap:10px;padding:clamp(22px,2.4vw,34px);border:1px solid var(--line);background:linear-gradient(180deg,var(--panel-2),var(--panel));color:var(--white);overflow:hidden;isolation:isolate;min-height:180px;transition:border-color .35s}
+.relcard::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(120% 120% at 100% 0,rgba(46,124,246,.22),transparent 60%);opacity:0;transition:opacity .5s ease}
+.relcard:hover,.relcard:focus-visible{border-color:rgba(46,124,246,.7);color:var(--white)}
+.relcard:hover::before,.relcard:focus-visible::before{opacity:1}
+.relcard__n{font-size:11px;letter-spacing:.14em;color:#6da2ff}
+.relcard b{font:600 clamp(20px,2vw,30px)/1.1 var(--sg);letter-spacing:-.01em;text-transform:uppercase}
+.relcard__d{font-size:15px;line-height:1.55;color:#aeb7c4;max-width:420px}
+.relcard__go{margin-top:auto;padding-top:12px;font-size:11px;letter-spacing:.16em;color:var(--steel);transition:color .25s}
+.relcard:hover .relcard__go{color:#fff}
+.capx__top--rev{align-items:start}
+
+/* ---- sectors ---- */
+.split--one{grid-template-columns:minmax(0,1fr)}
+.split--one .split__txt p{max-width:680px}
+/* ---- process ---- */
+.bigline{display:flex;flex-direction:column}
+.bigline li{font:600 clamp(28px,5.2vw,84px)/1.06 var(--sg);letter-spacing:-.02em;text-transform:uppercase;padding-block:.14em;border-top:1px solid var(--line-soft)}
+.bigline li:last-child{border-bottom:1px solid var(--line-soft)}
+.bigline li b{font-weight:600;background:linear-gradient(90deg,#F5F7FA,#8A94A3);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---- articles ---- */
+.article{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:clamp(32px,6vw,110px);align-items:start}
+.prose{display:flex;flex-direction:column;gap:22px;max-width:720px}
+.prose p{font-size:clamp(16px,1.3vw,19px);line-height:1.75;color:#b8c0cc}
+.prose .h3{margin-top:18px}
+.pull{font:500 clamp(22px,2.6vw,38px)/1.2 var(--sg);letter-spacing:-.01em;color:var(--white);border-left:2px solid var(--accent);padding-left:clamp(16px,2vw,28px);margin:10px 0}
+.list-plain--art li{font-size:clamp(16px,1.3vw,19px);padding-block:14px}
+.facts-panel{position:sticky;top:120px}
+.facts-panel dt{padding-top:16px}
+.facts-panel dd{font-size:clamp(16px,1.3vw,19px)}
+.figwrap{max-width:900px}
+.post--ph{cursor:default}
+.post--ph::before{display:none}
+.post--ph small,.post--ph .post-t{color:var(--dim)}
+.post--ph:hover small,.post--ph:hover .post-t{transform:none;color:var(--dim)}
+
+@media (max-width:1000px){.article{grid-template-columns:1fr}.facts-panel{position:static}}
+@media (max-width:899px){
+  .relgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pinx__in{grid-template-columns:1fr}
+  .stepstrip{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stepstrip li{padding-left:0;border-right:0;border-bottom:1px solid var(--line-soft)}
+}
+@media (max-width:560px){
+  .relgrid,.relgrid--2{grid-template-columns:1fr}
+  .stepstrip{grid-template-columns:1fr}
+  .pinitem{grid-template-columns:36px minmax(0,1fr)}
+  .h-page{letter-spacing:-.015em}
+}

@@ -29,6 +29,7 @@
   tick(); setInterval(tick, 1000);
 
   /* nav + progress + HUD */
+  var capidxEl = $('.capidx');
   var header = $('#nav'), hud = $('.hud-index'), progressBar = $('#progressBar'), hudPct = $('#hudPct');
   var lastY = 0, ticking = false, menuOpen = false;
   function frame() {
@@ -39,6 +40,7 @@
     if (progressBar) progressBar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
     if (hudPct) hudPct.textContent = ('00' + Math.round(p * 100)).slice(-3);
     header.classList.toggle('is-solid', y > 60);
+    if (capidxEl) { capidxEl.classList.toggle('is-stuck', capidxEl.previousElementSibling && capidxEl.previousElementSibling.getBoundingClientRect().bottom <= 1); capidxEl.classList.toggle('hdr-on', !header.classList.contains('is-hidden') && y > 60); }
     var dy = y - lastY;
     if (!menuOpen && !reduce) {
       if (y > 260 && dy > 6) header.classList.add('is-hidden');
@@ -73,7 +75,7 @@
         var act = $('.capidx a.is-active'); if (act && act.scrollIntoView && window.innerWidth < 900) { var box = act.parentNode; box.scrollLeft = act.offsetLeft - 20; }
       });
     }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
-    $$('.capx').forEach(function (s) { cio.observe(s); });
+    $$('.capx, [data-sub]').forEach(function (s) { cio.observe(s); });
   }
 
   /* mobile menu */
@@ -344,6 +346,28 @@
       gsap.fromTo(vis, { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.1, ease: 'power3.inOut', scrollTrigger: { trigger: vis, start: 'top 88%', once: true }, onComplete: function () { gsap.set(vis, { clearProps: 'clipPath' }); } });
       var nums = $('.cap-num', sec);
       if (nums) gsap.fromTo(nums, { y: 40 }, { y: -40, ease: 'none', scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: true } });
+    });
+
+
+    /* pinned scenes (desktop): sticky stage; scroll progress picks the active item */
+    $$('.pinx').forEach(function (sec) {
+      var items = $$('.pinitem', sec), dets = $$('.pindetail p', sec), n = items.length, cur = $('.pin-cur', sec), bar = $('.pin-bar', sec), nodes = $$('.pnode', sec), last = -1;
+      function set(i) {
+        if (i === last) return; last = i;
+        items.forEach(function (it, k) { it.classList.toggle('is-active', k === i); });
+        dets.forEach(function (d, k) { d.classList.toggle('is-active', k === i); });
+        nodes.forEach(function (nd, k) { nd.classList.toggle('is-on', k <= i); });
+        if (cur) cur.textContent = ('0' + (i + 1)).slice(-2);
+      }
+      var mm = gsap.matchMedia();
+      mm.add('(min-width: 900px) and (min-height: 620px)', function () {
+        set(0);
+        var st = ScrollTrigger.create({ trigger: sec, start: 'top top', end: 'bottom bottom', onUpdate: function (self) {
+          set(Math.min(n - 1, Math.floor(self.progress * n)));
+          if (bar) bar.style.transform = 'scaleX(' + self.progress.toFixed(4) + ')';
+        } });
+        return function () { st.kill(); items.forEach(function (it) { it.classList.remove('is-active'); }); if (items[0]) items[0].classList.add('is-active'); };
+      });
     });
 
     /* footer: wordmark + big mark */

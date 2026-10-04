@@ -1,0 +1,103 @@
+/* ==========================================================================
+   NORTHLINE — shared shell (loaded on every page, after main.css)
+   mega-menu nav · mobile accordion · back-to-top · focus states · image treatment
+   Motion rule: transform + opacity only.
+   ========================================================================== */
+
+/* ---- focus: visible, high-contrast, consistent ---- */
+:focus{outline-offset:3px}
+:focus-visible{outline:2px solid #6DA2FF;outline-offset:3px;border-radius:1px}
+.btn:focus-visible,.nav-cta:focus-visible{outline:2px solid #fff;outline-offset:4px;box-shadow:0 0 0 5px rgba(46,124,246,.85)}
+.btn-ink:focus-visible,.sectors a:focus-visible,.sheet a:focus-visible{outline-color:#1F63D1;box-shadow:none}
+.menu :focus-visible,.mega :focus-visible{outline-color:#fff}
+input:focus-visible,textarea:focus-visible{outline:2px solid #6DA2FF;outline-offset:2px}
+.skip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+::selection{background:rgba(46,124,246,.55);color:#fff}
+
+/* ---- primary nav: items with mega panels ---- */
+.nav-links .nav-item{position:static;display:flex;align-items:center;gap:0}
+.nav-chev{display:inline-grid;place-items:center;width:24px;height:24px;margin-left:2px;color:var(--steel);transition:color .25s}
+.nav-chev svg{width:10px;height:6px;transition:transform .45s var(--ease)}
+.nav-chev:hover,.nav-item.is-open .nav-chev{color:var(--white)}
+.nav-item.is-open .nav-chev svg{transform:rotate(180deg)}
+.mega{position:absolute;left:0;right:0;top:100%;z-index:2;background:rgba(8,11,16,.985);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line);
+  opacity:0;visibility:hidden;pointer-events:none;transform:translate3d(0,-10px,0);
+  transition:opacity .28s ease,transform .5s var(--ease),visibility 0s .28s;text-transform:none;letter-spacing:0;font-weight:400}
+.nav-item.is-open>.mega{opacity:1;visibility:visible;pointer-events:auto;transform:none;transition:opacity .3s ease,transform .55s var(--ease),visibility 0s}
+.mega::before{content:"";position:absolute;left:0;right:0;top:-18px;height:18px} /* hover bridge */
+.mega__in{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,340px);gap:clamp(28px,4vw,64px);padding-block:clamp(26px,3vw,40px) clamp(28px,3.2vw,44px)}
+.mega__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(18px,2.4vw,36px)}
+.mega__grid--4{grid-template-columns:repeat(2,minmax(0,1fr))}
+.mega__a{display:grid;grid-template-columns:34px minmax(0,1fr);gap:2px 10px;padding:16px 0;border-top:1px solid var(--line-soft);color:var(--white);position:relative;transition:color .25s}
+.mega__a em{font:500 11px/1.6 var(--mono);font-style:normal;letter-spacing:.12em;color:var(--dim);grid-row:1/3;padding-top:2px}
+.mega__a b{font:600 16px/1.25 var(--sg);letter-spacing:.01em;text-transform:none;display:block}
+.mega__a span{font:400 13px/1.5 var(--body);color:var(--steel);display:block}
+.mega__a:hover,.mega__a:focus-visible{color:#fff}
+.mega__a:hover b{color:#8fb9ff}
+.mega__a::after{content:"";position:absolute;left:0;top:-1px;height:1px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:0 50%;transition:transform .55s var(--ease)}
+.mega__a:hover::after,.mega__a:focus-visible::after{transform:scaleX(1)}
+.mega__feat{position:relative;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel-2),var(--panel));padding:clamp(20px,2vw,28px);display:flex;flex-direction:column;gap:14px;overflow:hidden;isolation:isolate}
+.mega__feat .mf-mark{position:absolute;right:-26px;top:-18px;width:150px;height:auto;z-index:-1;opacity:.9;pointer-events:none;overflow:visible}
+.mega__feat .mf-mark path{fill:none;stroke:rgba(245,247,250,.16);stroke-width:1;vector-effect:non-scaling-stroke}
+.mega__feat .mf-mark .mf-v{stroke:rgba(46,124,246,.6)}
+.mega__feat .tag{color:#6da2ff;font-size:10px}
+.mega__feat p{font:500 19px/1.3 var(--sg);color:var(--white);text-transform:none;letter-spacing:-.005em;max-width:250px}
+.mega__feat a.mf-link{font:500 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--white);display:inline-flex;gap:10px;align-items:center;padding:6px 0}
+.mega__feat a.mf-link:hover{color:#8fb9ff}
+.mega__feat a.mf-link+a.mf-link{color:var(--steel)}
+@media (max-width:1180px){.mega__in{grid-template-columns:minmax(0,1fr)}.mega__feat{display:none}}
+
+/* ---- mobile menu: accordion ---- */
+.menu__nav .macc{border-top:1px solid var(--line);opacity:0;transform:translate3d(0,40px,0);transition:opacity .5s ease,transform .8s var(--ease)}
+.menu-open .menu__nav .macc{opacity:1;transform:none;transition-delay:calc(.25s + var(--i)*.07s)}
+.macc__btn{width:100%;display:flex;align-items:baseline;gap:18px;padding:14px 0;text-align:left;font:600 clamp(30px,9vw,52px)/1.05 var(--sg);letter-spacing:-.01em;text-transform:uppercase;color:var(--white);min-height:44px}
+.macc__btn em{font-style:normal;font:400 11px/1 var(--mono);color:var(--dim);letter-spacing:.14em}
+.macc__btn .macc__pm{margin-left:auto;align-self:center;position:relative;width:18px;height:18px;flex:none}
+.macc__pm::before,.macc__pm::after{content:"";position:absolute;left:0;top:8px;width:18px;height:1.5px;background:var(--white);transition:transform .45s var(--ease)}
+.macc__pm::after{transform:rotate(90deg)}
+.macc__btn[aria-expanded="true"] .macc__pm::after{transform:rotate(0)}
+.macc__panel{padding:0 0 10px}
+.macc__panel[hidden]{display:none}
+.menu__nav .macc__panel a{display:flex;align-items:baseline;gap:14px;padding:13px 0 13px 6px;border-top:1px solid var(--line-soft);border-bottom:0;font:500 17px/1.3 var(--body);letter-spacing:0;text-transform:none;color:#d3dae4;opacity:1;transform:none;transition:color .25s;min-height:44px}
+.menu__nav .macc__panel a em{font:400 11px/1 var(--mono);color:var(--dim);letter-spacing:.12em;min-width:22px}
+.menu__nav .macc__panel a:first-child{border-top:0;color:#8fb9ff}
+.menu__nav .macc__panel a:hover,.menu__nav .macc__panel a:focus-visible{color:#fff}
+.menu__nav .macc__panel a[aria-current="page"]{color:#fff}
+.macc__panel:not([hidden]) a{animation:accIn .5s var(--ease) both}
+.macc__panel:not([hidden]) a:nth-child(2){animation-delay:.04s}.macc__panel:not([hidden]) a:nth-child(3){animation-delay:.08s}
+.macc__panel:not([hidden]) a:nth-child(4){animation-delay:.12s}.macc__panel:not([hidden]) a:nth-child(5){animation-delay:.16s}
+.macc__panel:not([hidden]) a:nth-child(6){animation-delay:.2s}.macc__panel:not([hidden]) a:nth-child(7){animation-delay:.24s}
+@keyframes accIn{from{opacity:0;transform:translate3d(0,10px,0)}to{opacity:1;transform:none}}
+
+/* ---- back to top ---- */
+.btt{position:fixed;right:var(--pad);bottom:calc(14px + env(safe-area-inset-bottom));z-index:92;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;color:var(--white);
+  background:rgba(10,14,20,.82);border:1px solid var(--line);opacity:0;visibility:hidden;transform:translate3d(0,14px,0);
+  transition:opacity .35s ease,transform .6s var(--ease),visibility 0s .35s,border-color .25s,color .25s}
+.btt.is-on{opacity:1;visibility:visible;transform:none;transition:opacity .35s ease,transform .6s var(--ease),visibility 0s,border-color .25s,color .25s}
+.btt:hover{border-color:var(--accent);color:#fff}
+.btt svg{position:absolute;inset:0;width:100%;height:100%}
+.btt .btt-ring{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%}
+.btt .btt-arr{position:relative;width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6;inset:auto}
+.menu-open .btt{opacity:0;visibility:hidden}
+@media (max-width:760px){.btt{width:44px;height:44px}}
+@media print{.btt{display:none!important}}
+
+/* ---- image treatment: one rule set ---- */
+img[loading="lazy"]{background:#0c1017}
+.photo-frame img,.phero__photo img,.hero__photo img{background:#0A0E14}
+.photo-frame,.rcard__media{background:#0c1017}
+
+/* ---- layout stability ---- */
+.brand__lk{width:auto;aspect-ratio:496.32/94}
+.fbrand__lk{aspect-ratio:496.32/94;width:auto}
+.nav-links{min-height:44px}
+.topbar__in{min-height:33px}
+
+/* ---- nav: tidy link rhythm at mid widths ---- */
+@media (max-width:1180px){.nav-links{gap:clamp(14px,1.8vw,22px)}.nav-links .nav-opt{display:none}}
+@media (min-width:900px) and (max-width:1020px){.nav-cta{padding:11px 14px}.nav-links{font-size:11px;letter-spacing:.1em}}
+
+/* ---- home: sector links inside the light reel cards ---- */
+.sector-links{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:20px;font-size:11px;letter-spacing:.16em}
+.sector-links a{color:#0A0E14;padding-block:8px;min-height:36px;display:inline-flex;align-items:center}
+.sector-links a:hover{color:#1F63D1}

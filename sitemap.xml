@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- TODO: replace example.com with the production URL before launch -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.example.com/northline/</loc><lastmod>2026-10-03</lastmod><priority>1.0</priority></url>
-  <url><loc>https://www.example.com/northline/capabilities.html</loc><lastmod>2026-10-03</lastmod><priority>0.9</priority></url>
-  <url><loc>https://www.example.com/northline/about.html</loc><lastmod>2026-10-03</lastmod><priority>0.7</priority></url>
-  <url><loc>https://www.example.com/northline/contact.html</loc><lastmod>2026-10-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://www.example.com/northline/capability-statement.html</loc><lastmod>2026-10-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.example.com/northline/</loc><lastmod>2026-10-04</lastmod><priority>1.0</priority></url>
+  <url><loc>https://www.example.com/northline/capabilities.html</loc><lastmod>2026-10-04</lastmod><priority>0.9</priority></url>
+  <url><loc>https://www.example.com/northline/capabilities/websites.html</loc><lastmod>2026-10-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.example.com/northline/capabilities/recruitment-pipelines.html</loc><lastmod>2026-10-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.example.com/northline/capabilities/marketing-campaigns.html</loc><lastmod>2026-10-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.example.com/northline/capabilities/video.html</loc><lastmod>2026-10-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.example.com/northline/capabilities/consulting.html</loc><lastmod>2026-10-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.example.com/northline/capabilities/government-contracting-consulting.html</loc><lastmod>2026-10-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.example.com/northline/sectors/index.html</loc><lastmod>2026-10-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.example.com/northline/sectors/federal.html</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://www.example.com/northline/sectors/state.html</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://www.example.com/northline/sectors/municipal.html</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://www.example.com/northline/sectors/contractors.html</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://www.example.com/northline/process.html</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://www.example.com/northline/about.html</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://www.example.com/northline/contact.html</loc><lastmod>2026-10-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.example.com/northline/capability-statement.html</loc><lastmod>2026-10-04</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.example.com/northline/insights/index.html</loc><lastmod>2026-10-04</lastmod><priority>0.6</priority></url>
+  <url><loc>https://www.example.com/northline/insights/northline-launches-as-the-government-arm-of-bedrock-digital.html</loc><lastmod>2026-10-04</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.example.com/northline/insights/capability-statement-every-naics-code.html</loc><lastmod>2026-10-04</lastmod><priority>0.5</priority></url>
+  <url><loc>https://www.example.com/northline/insights/both-sides-of-the-contract.html</loc><lastmod>2026-10-04</lastmod><priority>0.5</priority></url>
 </urlset>
